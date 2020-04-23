@@ -104,7 +104,7 @@ class VideoXBlockTests(VideoXBlockTestBase):
         )
         player_state_mock.assert_called_once_with()
         render_resource_mock.assert_called_once_with(
-            'static/html/transcripts.html',
+            'templates/html/transcripts.html',
             transcripts=route_transcripts_mock()
         )
         player_mock.assert_called_once_with()
@@ -134,7 +134,7 @@ class VideoXBlockTests(VideoXBlockTestBase):
         # Assert
         self.assertIsInstance(student_view, Fragment)
         render_resource_mock.assert_called_once_with(
-            'static/html/student_view.html',
+            'templates/html/student_view.html',
             display_name='Video',
             download_transcript_allowed=False,
             transcripts_streaming_enabled=True,

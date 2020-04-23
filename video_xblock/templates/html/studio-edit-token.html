@@ -1,11 +1,9 @@
-{% load i18n %}
-
 <div class="custom-field-list">
   <div class="custom-field-section-label">
     {% if player_name == players.VIMEO %}
-      {% trans "Application Access Token" %}
+      Application Access Token
     {% else %}
-      {% trans "Client Token" %}
+      Client Token
     {% endif %}
   </div>
   <input
@@ -17,7 +15,7 @@
   {% ifequal player_name players.BRIGHTCOVE %}
     <div class="field-elements-wrapper">
       <button id="video-api-authenticate">
-        <span aria-hidden="true"></span>{% trans "Connect to video platform" %}<span class="sr"></span>
+        <span aria-hidden="true"></span>Connect to video platform<span class="sr"></span>
       </button>
     </div>
   {% endifequal %}

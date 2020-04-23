@@ -276,8 +276,9 @@ class BaseVideoPlayer(Plugin):
         and executed before initializing video components.
         """
         frag = self.get_frag(**context)
+        i18n_service = context.get('i18n_service')
         return Response(
-            self.render_template('base.html', frag=frag),
+            self.render_template('base.html', frag=frag, i18n_service=i18n_service),
             content_type='text/html'
         )
 

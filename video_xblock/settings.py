@@ -5,6 +5,8 @@ Common settings file, intended to set defaults.
 Source:
   https://github.com/edx/edx-platform/blob/open-release/eucalyptus.master/lms/envs/common.py#L2390
 """
+# import os
+# dir_path = os.path.dirname(os.path.realpath(__file__))
 
 ALL_LANGUAGES = (
     [u"aa", u"Afar"],
@@ -194,3 +196,14 @@ ALL_LANGUAGES = (
     [u"za", u"Zhuang"],
     [u"zu", u"Zulu"]
 )
+
+# PROJECT_ROOT = dir_path
+
+# TEMPLATES = [
+#     {
+#         'BACKEND': 'django.template.backends.django.DjangoTemplates',
+#         'DIRS': [
+#           PROJECT_ROOT + '/backends'
+#         ],
+#     }
+# ]

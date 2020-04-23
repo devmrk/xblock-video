@@ -1,4 +1,3 @@
-{% load i18n %}
 <h3 class="hd hd-2">{{display_name}}</h3>
 <iframe
     id="xblock-video-player-{{usage_id}}"
@@ -16,7 +15,7 @@
     {% if handout %}
         <li class="video-handout video-download-button-custom">
             <a href="{{ handout }}" class="download-handout" download="{{ handout_file_name }}">
-                {% trans 'Download Handout' %}
+                Download Handout
             </a>
         </li>
     {% endif %}
@@ -24,7 +23,7 @@
         <li class="video-transcript video-download-button-custom" id="download-transcripts-button">
             <div class="dropdown">
                 <a href="{{ handout }}" class="download-transcript dropdown">
-                    {% trans 'Download transcripts' %}
+                    Download transcripts
                 </a>
                 <div class="dropdown-content">
                     {% for transcript in transcripts %}
@@ -40,8 +39,8 @@
     {% if download_video_url %}
         <li class="video-download-button-custom">
             <a href="{{ download_video_url }}" class="download-video" download
-               title="{% trans 'Right-click and save link as to download file' %}"
-               target="_blank">{% trans 'Download Video file' %}
+               title="Right-click and save link as to download file"
+               target="_blank">Download Video file
             </a>
         </li>
     {% endif %}

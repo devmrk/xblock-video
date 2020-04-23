@@ -50,12 +50,12 @@ setup(
     dependency_links=[
         # At the moment of writing PyPI hosts outdated version of xblock-utils, hence git
         # Replace dependency links with numbered versions when it's released on PyPI
-        'git+https://github.com/edx/xblock-utils.git@v1.0.5#egg=xblock-utils==1.0.5',
+        # 'git+https://github.com/edx/xblock-utils.git@v1.0.5#egg=xblock-utils==1.2.0',
+        'git+https://github.com/devmrk/pycaption.git#egg=pycaption',
     ],
     install_requires=[
-        'XBlock>=1.0.0,<2.0.0',
-        'xblock-utils>=1.2.0,<=1.3.0',
-        'pycaption>=0.7.1,<1.0',  # The latest Python 2.7 compatible version
+        'XBlock',
+        # 'xblock-utils>=2.0.0,<=3.0.0',
         'requests>=2.9.1,<3.0.0',
         'babelfish>=0.5.5,<0.6.0',
     ],
@@ -72,5 +72,5 @@ setup(
             'html5-player = video_xblock.backends.html5:Html5Player',
         ]
     },
-    package_data=package_data("video_xblock", ["static", ]),
+    package_data=package_data("video_xblock", ["static", "templates" ]),
 )

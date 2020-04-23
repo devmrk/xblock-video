@@ -3,7 +3,7 @@ Video xblock helpers.
 """
 
 from collections import namedtuple
-from HTMLParser import HTMLParser
+from html.parser import HTMLParser
 from importlib import import_module
 from xml.sax.saxutils import unescape
 import os.path
@@ -51,8 +51,11 @@ def render_template(template_name, **context):
 
     Returns: django.utils.safestring.SafeText
     """
-    template_dirs = [os.path.join(os.path.dirname(__file__), 'static/html')]
-    engine = Engine(dirs=template_dirs, debug=True)
+    template_dirs = [os.path.join(os.path.dirname(__file__), 'templates/html')]
+    libraries = {
+        # 'i18n_service': context.get('i18n_service')
+    }
+    engine = Engine(dirs=template_dirs, debug=True, libraries=libraries)
     html = engine.get_template(template_name)
 
     return html_parser.unescape(

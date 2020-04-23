@@ -1,8 +1,6 @@
-{% load i18n %}
-
 <div class="accordion">
   <button class="accordion-btn {% if transcripts_type == 'manual' %}active{% endif %}">
-    {% trans "Manual & default transcripts" %}
+    Manual & default transcripts
   </button>
   <div class="accordion-panel {% if transcripts_type == 'manual' %}active{% endif %}" id="accordion-panel-transcripts">
     {% for field in transcripts_fields %}
@@ -25,7 +23,7 @@
   </div>
 
   <button class="accordion-btn {% if transcripts_type == '3PM' %}active{% endif %}">
-    {% trans "3PlayMedia transcripts" %}
+    3PlayMedia transcripts
   </button>
   <div class="accordion-panel {% if transcripts_type == '3PM' %}active{% endif %}" id="accordion-panel-3pm">
     {% for field in three_pm_fields %}

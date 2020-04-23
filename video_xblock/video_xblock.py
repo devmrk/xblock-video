@@ -322,7 +322,7 @@ class VideoXBlock(
         log.debug("[student_view_context]: transcripts %s", context['transcripts'])
         frag = Fragment(
             render_resource(
-                'static/html/student_view.html',
+                'templates/html/student_view.html',
                 **context
             )
         )
@@ -413,8 +413,8 @@ class VideoXBlock(
             'initial_default_transcripts': initial_default_transcripts,
             'transcripts_autoupload_message': transcripts_autoupload_message,
             'download_transcript_handler_url': download_transcript_handler_url,
+            # 'i18n_service': self.runtime.service(self, 'i18n'),
         }
-
         fragment.content = render_template('studio-edit.html', **context)
         fragment.add_css(resource_string("static/css/student-view.css"))
         fragment.add_css(resource_string("static/css/transcripts-upload.css"))
@@ -442,11 +442,13 @@ class VideoXBlock(
         player = self.get_player()
         save_state_url = self.runtime.handler_url(self, 'save_player_state')
         transcripts = render_resource(
-            'static/html/transcripts.html',
+            'templates/html/transcripts.html',
             transcripts=self.route_transcripts()
         ).strip()
         return player.get_player_html(
-            url=self.href, account_id=self.account_id, player_id=self.player_id,
+            url=self.href,
+            account_id=self.account_id,
+            player_id=self.player_id,
             video_id=player.media_id(self.href),
             video_player_id='video_player_{}'.format(self.block_id),
             save_state_url=save_state_url,
@@ -455,6 +457,7 @@ class VideoXBlock(
             end_time=int(self.end_time.total_seconds()),  # pylint: disable=no-member
             brightcove_js_url=VideoXBlock.get_brightcove_js_url(self.account_id, self.player_id),
             transcripts=transcripts,
+            i18n_service=self.runtime.service(self, 'i18n')
         )
 
     @XBlock.json_handler
@@ -879,3 +882,27 @@ class VideoXBlock(
         xblock_body["content_type"] = "Video"
 
         return xblock_body
+
+    # @staticmethod
+    # def workbench_scenarios():
+    #     """A canned scenario for display in the workbench."""
+    #     return [
+    #         ("My Video Block",
+    #          """<video_xblock
+    #                 href="www.youtube.com/watch?v=LGHItQK2fA8"
+    #                 player_name="youtube-player"
+    #                 end_time="00:00:33"
+    #                 volume="0.5"
+    #                 muted="true"
+    #                 current_time="10"
+    #                 playback_rate="0"
+    #             />
+    #          """),
+    #         ("Multiple MyXBlock",
+    #          """<vertical_demo>
+    #             <myblock/>
+    #             <myblock/>
+    #             <myblock/>
+    #             </vertical_demo>
+    #          """),
+    #     ]
