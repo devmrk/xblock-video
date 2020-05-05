@@ -348,6 +348,11 @@ class TranscriptsMixin(XBlock):
         """
         caps_path = request.query_string
         caps = requests.get(request.host_url + caps_path).text
+        log.info('********')
+        log.info(caps_path)
+        log.info(request.host_url)
+        log.info(caps)
+        log.info('********')
         return Response(self.convert_caps_to_vtt(caps))
 
     @XBlock.handler
