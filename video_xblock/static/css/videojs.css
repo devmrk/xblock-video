@@ -373,6 +373,10 @@ body {
     padding: 8px 0 0 3px;
 }
 
+.video-js .vjs-big-play-button {
+    display: none;
+}
+
 #transcript {
     font-family: "Open Sans","Helvetica Neue",Helvetica,Arial,sans-serif;
     font-size: 14px;
