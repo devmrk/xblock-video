@@ -468,3 +468,7 @@ body {
 .vjs-custom-transcript-button .vjs-menu {
     transform: translate(-75%);
 }
+
+.video-js .vimeoFrame {
+    padding-bottom: 100% !important;
+}
