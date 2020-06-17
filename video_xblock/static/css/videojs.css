@@ -472,3 +472,8 @@ body {
 .video-js .vimeoFrame {
     position: initial !important;
 }
+
+.video-js .vimeoplayer {
+    height: 100%;
+    top: 0;
+}
