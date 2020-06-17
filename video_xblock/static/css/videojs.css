@@ -9,9 +9,9 @@ body {
 }
 
 .video-js .vjs-control-bar {
-    background-color: #282C2E;
+    background-color: rgba(40, 44, 46, 0.75);
     display: flex;
-    margin-bottom: -30px;
+    margin-bottom: -40px;
     color: #CFD8DC;
     height: 40px;
 }
@@ -470,5 +470,5 @@ body {
 }
 
 .video-js .vimeoFrame {
-    padding-bottom: 100% !important;
+    position: initial !important;
 }
