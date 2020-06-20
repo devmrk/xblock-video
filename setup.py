@@ -66,7 +66,7 @@ setup(
         'video_xblock.v1': [
             # 'youtube-player = video_xblock.backends.youtube:YoutubePlayer',
             # 'wistia-player = video_xblock.backends.wistia:WistiaPlayer',
-            # 'dummy-player = video_xblock.backends.dummy:DummyPlayer',
+            'dummy-player = video_xblock.backends.dummy:DummyPlayer',
             'vimeo-player = video_xblock.backends.vimeo:VimeoPlayer',
             'html5-player = video_xblock.backends.html5:Html5Player',
         ]
