@@ -30,7 +30,7 @@ function VideoXBlockStudentViewInit(runtime, element) {
     function sendData(handlerUrl, data) {
         console.log('sendData', handlerUrl, data);
         window.fetch(handlerUrl, {
-            type: 'POST',
+            method: 'POST',
             body: JSON.stringify(data)
         })
         .then(function() {
