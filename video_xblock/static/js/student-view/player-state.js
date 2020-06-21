@@ -92,6 +92,9 @@ var PlayerState = function(player, playerState) {
      *  We need it when user is switching between tabs.
      */
     var updateProgress = function(duration, currentTime) {
+        if (!duration || duration === 0) {
+            return;
+        }
         if (completionPublished === false && (currentTime / duration) >= playerStateObj.completePercentage){
             $.ajax({
                 type: 'POST',
