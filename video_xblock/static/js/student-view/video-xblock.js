@@ -36,8 +36,8 @@ function VideoXBlockStudentViewInit(runtime, element) {
         .then(function() {
             console.log('Data processed successfully.', handlerUrl);  // eslint-disable-line no-console
         })
-        .catch(function() {
-            console.log('Failed to process data');  // eslint-disable-line no-console
+        .catch(function(err) {
+            console.log('Failed to process data', err);  // eslint-disable-line no-console
         });
     }
     if (!window.videoXBlockListenerRegistered) {
