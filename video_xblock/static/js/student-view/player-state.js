@@ -96,15 +96,15 @@ var PlayerState = function(player, playerState) {
             return;
         }
         if (completionPublished === false && (currentTime / duration) >= playerStateObj.completePercentage){
-            $.ajax({
+            window.fetch({
                 type: 'POST',
                 url: runtime.handlerUrl(element, 'publish_completion'),
-                data: JSON.stringify({
+                body: JSON.stringify({
                     completion: 1.0
                 }),
-                error: function () {
-                    console.log('Completion progress not saved.')
-                }
+            }).catch(function() {
+                completionPublished = false;
+                console.log('Completion progress not saved.');
             });
             completionPublished = true;
         }

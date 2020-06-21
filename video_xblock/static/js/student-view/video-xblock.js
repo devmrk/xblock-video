@@ -25,16 +25,16 @@ function VideoXBlockStudentViewInit(runtime, element) {
     handlers.analytics[usageId] = eventHandlerUrl;
     /** Send data to server by POSTing it to appropriate VideoXBlock handler */
     function sendData(handlerUrl, data) {
-        console.Console.log('sendDAta', handlerUrl, data);
-        $.ajax({
+        console.Console.log('sendData', handlerUrl, data);
+        window.fetch({
             type: 'POST',
             url: handlerUrl,
-            data: JSON.stringify(data)
+            body: JSON.stringify(data)
         })
-        .done(function() {
+        .then(function() {
             console.log('Data processed successfully.');  // eslint-disable-line no-console
         })
-        .fail(function() {
+        .catch(function() {
             console.log('Failed to process data');  // eslint-disable-line no-console
         });
     }
