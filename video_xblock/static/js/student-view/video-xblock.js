@@ -18,10 +18,10 @@ function VideoXBlockStudentViewInit(runtime, element) {
     window.videoXBlockState = window.videoXBlockState || {};
     var handlers = window.videoXBlockState.handlers =  // eslint-disable-line vars-on-top
         window.videoXBlockState.handlers || {
-            saveState: function() {},
-            analytics: function() {},
-            downloadTranscriptChanged: function() {},
-            publishCompletion: function() {}
+            saveState: '',
+            analytics: '',
+            downloadTranscriptChanged: '',
+            publishCompletion: ''
         };
     handlers.saveState = stateHandlerUrl;
     handlers.analytics = eventHandlerUrl;
@@ -35,7 +35,7 @@ function VideoXBlockStudentViewInit(runtime, element) {
             body: JSON.stringify(data)
         })
         .then(function() {
-            console.log('Data processed successfully.');  // eslint-disable-line no-console
+            console.log('Data processed successfully.', handlerUrl);  // eslint-disable-line no-console
         })
         .catch(function() {
             console.log('Failed to process data');  // eslint-disable-line no-console
@@ -68,6 +68,7 @@ function VideoXBlockStudentViewInit(runtime, element) {
             }
             var url = handlers[event.data.action];  // eslint-disable-line vars-on-top
             if (url) {
+                console.log('receiveMessage', url);
                 sendData(url, event.data.info);
             }
         } catch (err) {

@@ -100,7 +100,7 @@ var PlayerState = function(player, playerState) {
         if (completionPublished === false && (currentTime / duration) >= playerStateObj.completePercentage) {
             parent.postMessage(
                 {
-                    action: 'publish_completion',
+                    action: 'publishCompletion',
                     info: {
                         completion: 1.0
                     },
