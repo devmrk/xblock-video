@@ -5,6 +5,7 @@
  */
 function VideoXBlockStudentViewInit(runtime, element) {
     'use strict';
+    window.xblockRuntime = runtime;
     var xblockElement = typeof(element[0]) !== 'undefined' ? element[0] : element;
     var stateHandlerUrl = runtime.handlerUrl(xblockElement, 'save_player_state');
     var eventHandlerUrl = runtime.handlerUrl(xblockElement, 'publish_event');

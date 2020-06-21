@@ -98,7 +98,7 @@ var PlayerState = function(player, playerState) {
         if (completionPublished === false && (currentTime / duration) >= playerStateObj.completePercentage){
             window.fetch({
                 type: 'POST',
-                url: runtime.handlerUrl(element, 'publish_completion'),
+                url: window.xblockRuntime.handlerUrl(element, 'publish_completion'),
                 body: JSON.stringify({
                     completion: 1.0
                 }),
