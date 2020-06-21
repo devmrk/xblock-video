@@ -28,7 +28,7 @@ function VideoXBlockStudentViewInit(runtime, element) {
     handlers.publishCompletion = publishCompletionUrl;
     /** Send data to server by POSTing it to appropriate VideoXBlock handler */
     function sendData(handlerUrl, data) {
-        console.Console.log('sendData', handlerUrl, data);
+        console.log('sendData', handlerUrl, data);
         window.fetch({
             type: 'POST',
             url: handlerUrl,
