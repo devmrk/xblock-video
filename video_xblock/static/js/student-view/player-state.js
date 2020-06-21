@@ -95,13 +95,24 @@ var PlayerState = function(player, playerState) {
         if (!duration || duration === 0) {
             return;
         }
+        var playerObj = this;
+        var transcriptUrl = getDownloadTranscriptUrl(transcripts, playerObj);
         if (completionPublished === false && (currentTime / duration) >= playerStateObj.completePercentage){
+            parent.postMessage(
+                {
+                    action: 'publish_completion',
+                    info: {
+                        completion: 1.0
+                    },
+                    xblockUsageId: xblockUsageId,
+                    downloadTranscriptUrl: transcriptUrl || '#'
+                },
+                document.location.protocol + '//' + document.location.host
+            );
             window.fetch({
                 type: 'POST',
                 url: window.xblockRuntime.handlerUrl(element, 'publish_completion'),
-                body: JSON.stringify({
-                    completion: 1.0
-                }),
+                body: JSON.stringify(),
             }).catch(function() {
                 completionPublished = false;
                 console.log('Completion progress not saved.');
@@ -115,7 +126,7 @@ var PlayerState = function(player, playerState) {
         var playbackProgress;
         playbackProgress = JSON.parse(localStorage.getItem('playbackProgress') || '{}');
         playbackProgress[window.videoPlayerId] = playerObj.ended() ? 0 : playerObj.currentTime();
-        updateProgress(this.duration(), playerObj.currentTime());
+        updateProgress.call(this, this.duration(), playerObj.currentTime());
         localStorage.setItem('playbackProgress', JSON.stringify(playbackProgress));
         
     };
