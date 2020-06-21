@@ -18,14 +18,14 @@ function VideoXBlockStudentViewInit(runtime, element) {
     window.videoXBlockState = window.videoXBlockState || {};
     var handlers = window.videoXBlockState.handlers =  // eslint-disable-line vars-on-top
         window.videoXBlockState.handlers || {
-            saveState: {},
-            analytics: {},
-            downloadTranscriptChanged: {},
-            publishCompletion: {}
+            saveState: function() {},
+            analytics: function() {},
+            downloadTranscriptChanged: function() {},
+            publishCompletion: function() {}
         };
-    handlers.saveState[usageId] = stateHandlerUrl;
-    handlers.analytics[usageId] = eventHandlerUrl;
-    handlers.publishCompletion[usageId] = publishCompletionUrl;
+    handlers.saveState = stateHandlerUrl;
+    handlers.analytics = eventHandlerUrl;
+    handlers.publishCompletion = publishCompletionUrl;
     /** Send data to server by POSTing it to appropriate VideoXBlock handler */
     function sendData(handlerUrl, data) {
         console.Console.log('sendData', handlerUrl, data);
@@ -66,7 +66,7 @@ function VideoXBlockStudentViewInit(runtime, element) {
                 // eslint-disable-next-line no-use-before-define
                 updateTranscriptDownloadUrl(event.data.downloadTranscriptUrl);
             }
-            var url = handlers[event.data.action][event.data.xblockUsageId];  // eslint-disable-line vars-on-top
+            var url = handlers[event.data.action];  // eslint-disable-line vars-on-top
             if (url) {
                 sendData(url, event.data.info);
             }

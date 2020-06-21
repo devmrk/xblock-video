@@ -97,7 +97,7 @@ var PlayerState = function(player, playerState) {
         }
         var playerObj = this;
         var transcriptUrl = getDownloadTranscriptUrl(transcripts, playerObj);
-        if (completionPublished === false && (currentTime / duration) >= playerStateObj.completePercentage){
+        if (completionPublished === false && (currentTime / duration) >= playerStateObj.completePercentage) {
             parent.postMessage(
                 {
                     action: 'publish_completion',
