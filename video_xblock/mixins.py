@@ -4,6 +4,7 @@ Video XBlock mixins geared toward specific subsets of functionality.
 import logging
 
 import requests
+from django.conf import settings
 from pycaption import detect_format, WebVTTWriter
 from webob import Response
 
@@ -15,6 +16,8 @@ from .constants import DEFAULT_LANG, TPMApiTranscriptFormatID, TPMApiLanguage, T
 from .utils import import_from, ugettext as _, underscore_to_mixedcase, Transcript
 
 log = logging.getLogger(__name__)
+
+COMPLETION_VIDEO_COMPLETE_PERCENTAGE = getattr(settings, 'COMPLETION_VIDEO_COMPLETE_PERCENTAGE', 1.0)
 
 
 @XBlock.wants('contentstore')
@@ -503,7 +506,8 @@ class PlaybackStateMixin(XBlock):
         state = {
             'captionsLanguage': self.captions_language or self.course_default_language,
             'transcriptsObject': transcripts_object,
-            'transcripts': transcripts
+            'transcripts': transcripts,
+            'completePercentage': COMPLETION_VIDEO_COMPLETE_PERCENTAGE,
         }
         for field_name in self.player_state_fields:
             mixedcase_field_name = underscore_to_mixedcase(field_name)

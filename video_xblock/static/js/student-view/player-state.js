@@ -13,6 +13,7 @@
 var PlayerState = function(player, playerState) {
     'use strict';
     var xblockUsageId = getXblockUsageId();
+    var completionPublished = false;
 
     /** Create hashmap with all transcripts */
     var getTranscipts = function(transcriptsData) {
@@ -90,12 +91,30 @@ var PlayerState = function(player, playerState) {
      *  Save player progress in browser's local storage.
      *  We need it when user is switching between tabs.
      */
+    var updateProgress = function(duration, currentTime) {
+        if (completionPublished === false && (currentTime / duration) >= playerStateObj.completePercentage){
+            $.ajax({
+                type: 'POST',
+                url: runtime.handlerUrl(element, 'publish_completion'),
+                data: JSON.stringify({
+                    completion: 1.0
+                }),
+                error: function () {
+                    console.log('Completion progress not saved.')
+                }
+            });
+            completionPublished = true;
+        }
+    }
+
     var saveProgressToLocalStore = function() {
         var playerObj = this;
         var playbackProgress;
         playbackProgress = JSON.parse(localStorage.getItem('playbackProgress') || '{}');
         playbackProgress[window.videoPlayerId] = playerObj.ended() ? 0 : playerObj.currentTime();
+        updateProgress(this.duration(), playerObj.currentTime());
         localStorage.setItem('playbackProgress', JSON.stringify(playbackProgress));
+        
     };
 
     setInitialState(playerState);

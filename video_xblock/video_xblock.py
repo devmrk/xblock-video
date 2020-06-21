@@ -18,7 +18,6 @@ import logging
 import os.path
 
 import requests
-from django.conf import settings
 from webob import Response
 from xblock.core import XBlock
 from xblock.fields import Scope, Boolean, String, Dict
@@ -41,8 +40,6 @@ from .utils import (
 from .workbench.mixin import WorkbenchMixin
 
 log = logging.getLogger(__name__)
-
-COMPLETION_VIDEO_COMPLETE_PERCENTAGE = getattr(settings, 'COMPLETION_VIDEO_COMPLETE_PERCENTAGE', 1.0)
 
 
 class VideoXBlock(
@@ -319,7 +316,6 @@ class VideoXBlock(
             'display_name': self.display_name,
             'usage_id': self.usage_id,
             'handout': self.handout,
-            'complete_percentage': COMPLETION_VIDEO_COMPLETE_PERCENTAGE,
             'transcripts': list(self.route_transcripts()),
             'download_transcript_allowed': self.download_transcript_allowed,
             'transcripts_streaming_enabled': self.threeplaymedia_streaming,
