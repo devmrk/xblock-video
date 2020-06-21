@@ -109,14 +109,6 @@ var PlayerState = function(player, playerState) {
                 },
                 document.location.protocol + '//' + document.location.host
             );
-            window.fetch({
-                type: 'POST',
-                url: window.xblockRuntime.handlerUrl(element, 'publish_completion'),
-                body: JSON.stringify(),
-            }).catch(function() {
-                completionPublished = false;
-                console.log('Completion progress not saved.');
-            });
             completionPublished = true;
         }
     }
