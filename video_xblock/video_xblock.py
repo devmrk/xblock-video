@@ -24,6 +24,7 @@ from xblock.fields import Scope, Boolean, String, Dict
 from xblock.fragment import Fragment
 from xblock.validation import ValidationMessage
 from xblockutils.studio_editable import StudioEditableXBlockMixin
+from xblock.exceptions import JsonHandlerError
 
 from . import __version__
 from .backends.base import BaseVideoPlayer
@@ -40,6 +41,8 @@ from .workbench.mixin import WorkbenchMixin
 
 log = logging.getLogger(__name__)
 
+COMPLETION_VIDEO_COMPLETE_PERCENTAGE = getattr(settings, 'COMPLETION_VIDEO_COMPLETE_PERCENTAGE', 1.0)
+
 
 class VideoXBlock(
         SettingsMixin, TranscriptsMixin, PlaybackStateMixin, LocationMixin,
@@ -55,6 +58,10 @@ class VideoXBlock(
     """
 
     icon_class = "video"
+
+    has_custom_completion = True
+
+    completion_method = "completable"
 
     display_name = String(
         default=_('Video'),
@@ -311,6 +318,7 @@ class VideoXBlock(
             'display_name': self.display_name,
             'usage_id': self.usage_id,
             'handout': self.handout,
+            'complete_percentage': COMPLETION_VIDEO_COMPLETE_PERCENTAGE,
             'transcripts': list(self.route_transcripts()),
             'download_transcript_allowed': self.download_transcript_allowed,
             'transcripts_streaming_enabled': self.threeplaymedia_streaming,
@@ -742,6 +750,27 @@ class VideoXBlock(
         if error_message:
             return {'error_message': error_message}
         return {'success_message': 'Successfully authenticated to the video platform.'}
+
+    @XBlock.json_handler
+    def publish_completion(self, data, dispatch):  # pylint: disable=unused-argument
+        """
+        Entry point for completion for student_view.
+        Parameters:
+            data: JSON dict:
+                key: "completion"
+                value: float in range [0.0, 1.0]
+            dispatch: Ignored.
+        Return value: If an error occurs, JSON response (200 on success,
+        400 for malformed data) or {"result": 200} for success.
+        """
+        value = data.get('completion', None)
+        if not 0.0 <= value <= 1.0:
+            message = u"Invalid completion value {}. Must be in range [0.0, 1.0]"
+            raise JsonHandlerError(400, message.format(value))
+        if value >= COMPLETION_VIDEO_COMPLETE_PERCENTAGE:
+            value = 1.0
+        self.runtime.publish(self, "completion", {"completion": value})
+        return {"result": "success"}
 
     def update_metadata_authentication(self, auth_data, player):
         """

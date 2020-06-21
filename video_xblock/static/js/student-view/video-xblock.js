@@ -24,6 +24,7 @@ function VideoXBlockStudentViewInit(runtime, element) {
     handlers.analytics[usageId] = eventHandlerUrl;
     /** Send data to server by POSTing it to appropriate VideoXBlock handler */
     function sendData(handlerUrl, data) {
+        console.Console.log('sendDAta', handlerUrl, data);
         $.ajax({
             type: 'POST',
             url: handlerUrl,
