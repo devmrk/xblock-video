@@ -18,6 +18,7 @@ import logging
 import os.path
 
 import requests
+from django.conf import settings
 from webob import Response
 from xblock.core import XBlock
 from xblock.fields import Scope, Boolean, String, Dict
