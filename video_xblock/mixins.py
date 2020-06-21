@@ -508,6 +508,7 @@ class PlaybackStateMixin(XBlock):
             'transcriptsObject': transcripts_object,
             'transcripts': transcripts,
             'completePercentage': COMPLETION_VIDEO_COMPLETE_PERCENTAGE,
+            'usageId': self.usage_id
         }
         for field_name in self.player_state_fields:
             mixedcase_field_name = underscore_to_mixedcase(field_name)

@@ -9,6 +9,7 @@ function VideoXBlockStudentViewInit(runtime, element) {
     var stateHandlerUrl = runtime.handlerUrl(xblockElement, 'save_player_state');
     var eventHandlerUrl = runtime.handlerUrl(xblockElement, 'publish_event');
     var downloadTranscriptHandlerUrl = runtime.handlerUrl(xblockElement, 'download_transcript');
+    var publishCompletionUrl = runtime.handlerUrl(xblockElement, 'publish_completion');
 
     var usageId = (
         xblockElement.attributes['data-usage-id'] ||  // Open edX runtime
@@ -19,10 +20,12 @@ function VideoXBlockStudentViewInit(runtime, element) {
         window.videoXBlockState.handlers || {
             saveState: {},
             analytics: {},
-            downloadTranscriptChanged: {}
+            downloadTranscriptChanged: {},
+            publishCompletion: {}
         };
     handlers.saveState[usageId] = stateHandlerUrl;
     handlers.analytics[usageId] = eventHandlerUrl;
+    handlers.publishCompletion[usageId] = publishCompletionUrl;
     /** Send data to server by POSTing it to appropriate VideoXBlock handler */
     function sendData(handlerUrl, data) {
         console.Console.log('sendData', handlerUrl, data);
@@ -50,8 +53,7 @@ function VideoXBlockStudentViewInit(runtime, element) {
         * Pass the sate to `saveState()` for handling.
     */
     function receiveMessage(event) {
-        debugger;
-        console.log(event);
+        console.log(event, handlers[event.data.action]);
         // For Chrome, the origin property is in the event.originalEvent object.
         var origin = event.origin || event.originalEvent.origin;
         if ((origin !== document.location.protocol + '//' + document.location.host) ||
