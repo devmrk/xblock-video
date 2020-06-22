@@ -31,9 +31,15 @@ function VideoXBlockStudentViewInit(runtime, element) {
         console.log('sendData', handlerUrl, data);
         window.fetch(handlerUrl, {
             method: 'POST',
-            body: JSON.stringify(data)
+            body: JSON.stringify(data),
+            headers: {
+                'X-CSRFToken': $.cookie('csrftoken')
+            }
         })
-        .then(function() {
+        .then(function(response) {
+            if (!response.ok) {
+                throw response;
+            }
             console.log('Data processed successfully.', handlerUrl);  // eslint-disable-line no-console
         })
         .catch(function(err) {
