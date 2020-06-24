@@ -114,7 +114,7 @@ class TranscriptsMixin(XBlock):
             text_lines.append(line)
         return ' '.join(text_lines)
 
-    def route_transcripts(self):
+    def route_transcripts(self, request):
         """
         Re-route transcripts to appropriate handler.
 
@@ -140,9 +140,10 @@ class TranscriptsMixin(XBlock):
                         self, 'fetch_from_three_play_media', query="{}={}".format(tran['lang_id'], tran['id'])
                     )
             elif not tran['url'].endswith('.vtt'):
-                tran['url'] = self.runtime.handler_url(
-                    self, 'srt_to_vtt', query=tran['url']
-                )
+                # tran['url'] = self.runtime.handler_url(
+                #     self, 'srt_to_vtt', query=tran['url']
+                # )
+                trans['url'] = request.host_url + tran['url']
             yield tran
 
     def get_transcript_download_link(self):
