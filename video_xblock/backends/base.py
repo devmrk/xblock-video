@@ -317,7 +317,7 @@ class BaseVideoPlayer(Plugin):
             return any(regex.search(href) for regex in cls.url_re)
         elif isinstance(cls.url_re, type(re.compile(''))):
             return cls.url_re.search(href)  # pylint: disable=no-member
-        elif isinstance(cls.url_re, basestring):
+        elif isinstance(cls.url_re, str):
             return re.search(cls.url_re, href, re.I)
 
     def add_js_content(self, path, **context):
