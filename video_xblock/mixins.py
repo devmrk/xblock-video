@@ -143,7 +143,7 @@ class TranscriptsMixin(XBlock):
                 # tran['url'] = self.runtime.handler_url(
                 #     self, 'srt_to_vtt', query=tran['url']
                 # )
-                trans['url'] = request.host_url + tran['url']
+                # trans['url'] = request.host_url + tran['url']
             yield tran
 
     def get_transcript_download_link(self):
