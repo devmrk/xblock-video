@@ -114,7 +114,7 @@ class TranscriptsMixin(XBlock):
             text_lines.append(line)
         return ' '.join(text_lines)
 
-    def route_transcripts(self, request):
+    def route_transcripts(self):
         """
         Re-route transcripts to appropriate handler.
 
