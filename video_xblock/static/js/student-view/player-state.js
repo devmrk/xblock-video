@@ -12,6 +12,7 @@
 
 var PlayerState = function(player, playerState) {
     'use strict';
+    console.log('init player state');
     var xblockUsageId = getXblockUsageId();
     var completionPublished = false;
 
