@@ -477,3 +477,11 @@ body {
     height: 100%;
     top: 0;
 }
+
+.video-js .vjs-text-track-display > div > div:first-child {
+    display: block;
+}
+
+.video-js .vjs-text-track-display > div > div {
+    display: none;
+}
