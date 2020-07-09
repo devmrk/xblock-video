@@ -139,10 +139,10 @@ class TranscriptsMixin(XBlock):
                     tran['url'] = self.runtime.handler_url(
                         self, 'fetch_from_three_play_media', query="{}={}".format(tran['lang_id'], tran['id'])
                     )
-            elif not tran['url'].endswith('.vtt'):
-                tran['url'] = self.runtime.handler_url(
-                    self, 'srt_to_vtt', query=tran['url']
-                )
+            # elif not tran['url'].endswith('.vtt'):
+            #     tran['url'] = self.runtime.handler_url(
+            #         self, 'srt_to_vtt', query=tran['url']
+            #     )
             yield tran
 
     def get_transcript_download_link(self):
