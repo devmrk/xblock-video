@@ -28,6 +28,7 @@ domReady(function() {
             if (!enableTrack && tracks[0].kind === 'captions') {
                 tracks[0].mode = 'showing';
             }
+
             // fire up the plugin
             transcript = player_.transcript({
                 showTrackSelector: false,
