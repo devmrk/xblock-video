@@ -1,6 +1,7 @@
 body {
     margin: 0;
     display: flex;
+    height: 100%;
 }
 
 .video-js .vjs-has-started.vjs-user-inactive.vjs-playing .vjs-control-bar {
@@ -385,7 +386,7 @@ body {
 
 .transcript-body {
     max-height: 100%;
-    overflow: scroll;
+    overflow: visible;
     padding: 0 0 0 20px;
 }
 
