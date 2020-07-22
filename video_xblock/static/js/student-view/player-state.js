@@ -56,6 +56,10 @@ var PlayerState = function(player, playerState) {
         }
     };
 
+    function isEnded(duration, currentTime) { 
+        return duration - currentTime <= 0.05;
+    }
+
     /**
      * Save player state by posting it in a message to parent frame.
      * Parent frame passes it to a server by calling VideoXBlock.save_state() handler.
@@ -66,7 +70,7 @@ var PlayerState = function(player, playerState) {
 
         var newState = {
             volume: playerObj.volume(),
-            currentTime: playerObj.ended() ? 0 : playerObj.currentTime(),
+            currentTime: isEnded(playerObj.duration(), playerObj.currentTime())? 0 : playerObj.currentTime(),
             playbackRate: playerObj.playbackRate(),
             muted: playerObj.muted(),
             transcriptsEnabled: playerObj.transcriptsEnabled,
@@ -120,7 +124,7 @@ var PlayerState = function(player, playerState) {
         var currentTime = playerObj.currentTime();
         var playbackProgress;
         playbackProgress = JSON.parse(localStorage.getItem('playbackProgress') || '{}');
-        playbackProgress[window.videoPlayerId] = duration === currentTime ? 0 : currentTime;
+        playbackProgress[window.videoPlayerId] = isEnded(duration, currentTime) ? 0 : currentTime;
         updateProgress.call(this, duration, playerObj.currentTime());
         localStorage.setItem('playbackProgress', JSON.stringify(playbackProgress));
         
