@@ -102,7 +102,7 @@ var PlayerState = function(player, playerState) {
         }
         var playerObj = this;
         var transcriptUrl = getDownloadTranscriptUrl(transcripts, playerObj);
-        if (completionPublished === false && (currentTime / duration) >= 5) {
+        if (completionPublished === false && currentTime >= 5) {
             parent.postMessage(
                 {
                     action: 'publishCompletion',
