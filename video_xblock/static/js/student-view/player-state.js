@@ -116,7 +116,7 @@ var PlayerState = function(player, playerState) {
             );
             completionPublished = true;
         }
-    }
+    };
 
     var saveProgressToLocalStore = function() {
         var playerObj = this;
