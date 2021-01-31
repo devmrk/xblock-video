@@ -95,4 +95,15 @@ function VideoXBlockStudentViewInit(runtime, element) {
             }
         }
     }
+
+    $(function() {
+        $('.xblock.xblock-student_view a').click(function(e) {
+            var href = $(this).attr('href');
+            if (href.indexOf('docs.relny.com') !== -1) {
+                sendData(handlers.publishCompletion, {
+                    completion: 1.0
+                })
+            }
+            })
+    });
 }
